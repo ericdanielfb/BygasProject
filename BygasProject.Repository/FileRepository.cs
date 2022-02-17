@@ -6,18 +6,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace BygasProject.Repository
 {
     public class FileRepository : IFileRepository
     {
-        string defaultPath = AppDomain.CurrentDomain.BaseDirectory;
+        private readonly IConfiguration _configuration;
+
+        public readonly string fileName;
+
+        public FileRepository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            //fileName = _configuration["MockDatabase:BasePath"] + @"base.json";
+            fileName = @".\base.json";
+        }
 
         public bool WriteFile(List<Dish> fileInfo)
         {
             try
             {
-                var sw = new StreamWriter(defaultPath);
+                var sw = new StreamWriter(fileName);
 
                 var json = JsonSerializer.Serialize(fileInfo);
 
@@ -41,7 +52,7 @@ namespace BygasProject.Repository
 
             try
             {
-                var sr = new StreamReader(defaultPath);
+                var sr = new StreamReader(fileName);
 
                 response = JsonSerializer.Deserialize<List<Dish>>(sr.ReadToEnd());
 

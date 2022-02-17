@@ -28,6 +28,15 @@ namespace BygasProject.API.Controllers
             return Ok(dish);
         }
 
+        // GET: api/<DishController>/vegetarian
+        [HttpGet("vegetarian")]
+        public ActionResult<Dish> GetVegetarian()
+        {
+            var dish = _service.GetVegetarianDishes();
+
+            return Ok(dish);
+        }
+
         // GET api/<DishController>/5
         [HttpGet("{id}")]
         public ActionResult<Dish> Get(int id)

@@ -70,9 +70,20 @@ namespace BygasProject.Service
 
                 allDishes = newDishes;
 
+                _repository.WriteFile(allDishes);
+
                 response = true;
             }
             return response;
+        }
+
+        public List<Dish> GetVegetarianDishes()
+        {
+            var allDishes = GetAllDishes();
+
+            var vegetarianDishes = allDishes.Where(x => x.IsVegetarian).ToList();
+
+            return vegetarianDishes;
         }
     }
 }

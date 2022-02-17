@@ -14,5 +14,6 @@ namespace BygasProject.Service.Interfaces
         public Dish AddDish(Dish dish);
         public Dish EditDish(Dish dish);
         public bool DeleteDish(int id);
+        public List<Dish> GetVegetarianDishes();
     }
 }
